@@ -1,22 +1,20 @@
 T=list(range(10))
-T[0]=5
-T[5]=0
-T[8] = 2
-T[2] = 8
+
 n=len(T)
+#Fonction swap
+def swap(tab, number1, number2):
+    tab[number1], tab[number2] = tab[number2], tab[number1]
+
+swap(T, 0, 5)
+swap(T, 2, 8)
 print(T)
-temp=0
-j=0
 
-for i in T[1:n]:
-    print(i)
+for i in range(1, len(T)):
     temp = T[i]
-    j=i
-
-    while j>0 & T[j-1]>temp:
-        swap(T[j], T[j-1])
-        j = j-1
-
+    j = i
+    while   j>0 and T[j-1]>temp:
+            swap(T,j,j-1)
+            j=j-1
     T[j] = temp
 
 print(T)
