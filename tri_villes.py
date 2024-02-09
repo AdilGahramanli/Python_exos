@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import filedialog
 import csv
 import  math
+import  geopy
 
 
 class Ville :
@@ -38,33 +39,35 @@ def loadFile():
 
 def getDistanceFromGrenoble(ville):
 
-    r=6371**3
+    # r=6371**3
 
-    lat_Grenoble = 45.18675902087716 
-    long_Grenoble = 5.7362964134908285
+    # lat_Grenoble = 45.18675902087716 
+    # long_Grenoble = 5.7362964134908285
 
-    phi1= lat_Grenoble * math.pi/180
-    phi2 = ville.latitude*math.pi/180
-    deltaPhi = (ville.latitude - lat_Grenoble) * math.pi/180
-    deltaZegma = (ville.longitude - long_Grenoble) * math.pi/180
+    # phi1= lat_Grenoble * math.pi/180
+    # phi2 = ville.latitude*math.pi/180
+    # deltaPhi = (ville.latitude - lat_Grenoble) * math.pi/180
+    # deltaZegma = (ville.longitude - long_Grenoble) * math.pi/180
 
-    a=math.sin(deltaPhi/2)*math.sin(deltaPhi/2)+math.cos(phi1)*math.cos(phi2)*math.sin(deltaZegma/2)*math.sin(deltaZegma/2)
-    c=2*math.atan2(math.sqrt(a), math.sqrt(1-a))
-    d=r*c
+    # a=math.sin(deltaPhi/2)*math.sin(deltaPhi/2)+math.cos(phi1)*math.cos(phi2)*math.sin(deltaZegma/2)*math.sin(deltaZegma/2)
+    # c=2*math.atan2(math.sqrt(a), math.sqrt(1-a))
+    # d=r*c
+    return geopy.distance.geodesic((ville.latitude, ville.longitude), (45.166672, 5.71667)).m
 
-    latitude_difference = lat_Grenoble - ville.latitude
-    longitude_difference = long_Grenoble - ville.longitude
-    return 0
 
 
 def isLess(listVille, i, j):
-    print("implement me")
-    return True
+    distanceVille1 = getDistanceFromGrenoble(listVille[i])
+    distanceVille2 = getDistanceFromGrenoble(listVille[j])
+    if distanceVille1 < distanceVille2:
+        return True
 
 
 def swap(listVille, i, j):
-    print("implement me")
-    return True
+    if isLess(listVille, i, j)!=True:
+        listVille[i], listVille[j] = listVille[j], listVille[i]
+    return listVille
+
 
 
 def changeLabelFile(text):
@@ -119,17 +122,38 @@ def sort():
 
 
 def insertsort(listVille):
-    print("implement me !")
+    # j=0
+    # for i in range(1, len(listVille)): # boucle qui avance
+    #     j=i
+    #     while j>0 and isLess(listVille,j-1,j)!=True:
+    #         swap(listVille, j, j-1)
+    #         j=j-1 # fait reculer le j
     return listVille
 
 
 def selectionsort(listVille):
-    print("implement me !")
+    
+    nb = len(listVille)
+    for temp in range(0, nb):                   #temp sélectionnera chaque valeur du tableau
+        mini=temp                               #initialement, temp est considérée comme mini
+        for j in range(temp+1,nb):              #j va chercher toutes les valeurs à droite de temp
+            if listVille[j] < listVille[mini]:    #j compare sa valeur avec mini
+                mini = j                        #si j trouve une valeur moindre alors mini prend la même valeur que j
+        if mini != temp:
+            swap(listVille, temp, mini)          #fin de la boucle, on a trouvé la valeur minimale
+                                                #et on va la placer à l'endroit du temp
+                                         
     return listVille
 
 
 def bubblesort(listVille):
-    print("implement me !")
+    # permutation = True
+    # while   permutation==True:
+    #     permutation = False
+    #     for i in range(0, len(list)-1):
+    #         if list[i+1] < list[i]:
+    #             swap(list,i,i+1)
+    #             permutation = True
     return listVille
 
 

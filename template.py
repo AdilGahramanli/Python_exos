@@ -19,9 +19,10 @@ def selectionSort(inputArr):
         for j in range(temp+1,nb):              #j va chercher toutes les valeurs à droite de temp
             if inputArr[j] < inputArr[mini]:    #j compare sa valeur avec mini
                 mini = j                        #si j trouve une valeur moindre alors mini prend la même valeur que j
-        if mini != temp:                        #fin de la boucle, on a trouvé la valeur minimale
-            inputArr[temp] = inputArr[mini]     #et on va la placer à l'endroit du temp
-            inputArr[mini] = temp               #on replace mini sur temps pour pouvoir chercher le nouveau mini
+        if mini != temp:
+            swap(inputArr, temp, mini)          #fin de la boucle, on a trouvé la valeur minimale
+                                                #et on va la placer à l'endroit du temp
+                                                #on replace mini sur temps pour pouvoir chercher le nouveau mini
     return inputArr
 
 def bubbleSort(list):
@@ -43,7 +44,7 @@ def heapSort(inputArr, indexStart, indexEnd):
 # Création de list
 import random
 
-list_size = 8
+list_size = 25
 list = [random.randint(0, list_size * 2) for _ in range(list_size)]
 
 # Calculs, performances
