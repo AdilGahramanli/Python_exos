@@ -109,6 +109,9 @@ def glouton(chemin, tableau):
 
 
 chemin_petit=glouton(chemin_petit,nouveau_tableau_petit).copy()
+print(calculer_distance_total(chemin_petit))
+
+print(chemin_petit)
 
 folium.PolyLine(chemin_petit, tooltip="Coast").add_to(m)
 m.save("map.html")
